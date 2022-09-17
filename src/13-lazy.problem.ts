@@ -3,12 +3,37 @@
 import { expect, it } from "vitest";
 import { z } from "zod";
 
-const MenuItem = z.object({
-  //             ^ 🕵️‍♂️
-  link: z.string(),
-  label: z.string(),
-  children: z.array(MenuItem).default([]),
-});
+// const MenuItem = z.object({
+//   //             ^ 🕵️‍♂️
+//   link: z.string(),
+//   label: z.string(),
+//   children: z.array(MenuItem).default([]),
+// });
+interface MenuItem {
+  link: string;
+  label: string;
+  children?: MenuItem[];
+}
+const MenuItem: z.ZodType<MenuItem> = z.lazy(() =>
+  z.object({
+    link: z.string(),
+    label: z.string(),
+    children: z.array(MenuItem).default([]),
+  }),
+);
+type MenuItemType = z.infer<typeof MenuItem>;
+
+// const mItem: MenuItem | MenuItemType = {
+//   label: "home",
+//   link: "/",
+//   children: [
+//     {
+//       label: "nested",
+//       link: "/nested",
+//       children: [{}],
+//     },
+//   ],
+// };
 
 // TESTS
 
