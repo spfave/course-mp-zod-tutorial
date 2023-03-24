@@ -19,7 +19,7 @@ const genericFetch = <ZSchema extends z.ZodSchema>(
 
 it("Should fetch from the Star Wars API", async () => {
   const result = await genericFetch(
-    "https://swapi.dev/api/people/1",
+    "https://www.totaltypescript.com/swapi/people/1.json",
     z.object({
       name: z.string(),
     }),
